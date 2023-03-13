@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}home {% endblock %}
+
+
+{% block  body%}
+
+<div class="container border border-2 border-secondary-subtle mt-5" style="width: 500px; padding: 20px 18px;">
+    <h1 class="text-center">Log In</h1>
+<hr>
+    <form action="user_login" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">username</label>
+            <input type="text" class="form-control" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">password</label>
+            <input type="password" class="form-control" name="password"
+                id="exampleFormControlInput1"  required>
+        </div>
+        <p class="text-center">Not have account?<a href="/">signup</a> </p>
+        <div class="d-grid gap-2 mt-2">
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </div>
+    </form>
+</div>
+
+
+{% endblock body %}

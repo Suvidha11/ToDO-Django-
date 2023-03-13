@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %} {% endblock %}
+
+{% block body %}
+
+<nav class="navbar  bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" style="color: white;">To-Do App</a>
+    <form class="d-flex">
+      <ul class="navbar-nav me-2">
+        <li class="nav-item" style="color: white;">Hi, {{request.session.user_name}}</li>
+      </ul>
+      <a href="hendel_logout"><button class="btn btn-outline-light" type="button">log out</button></a>
+    </form>
+  </div>
+</nav>
+
+<!-- start forms -->
+<div class="container mt-5">
+  
+<!-- start forms -->
+    <form action="add" method="post" class="row g-3">
+        {% csrf_token %}
+        <div class="col-md-8">
+          <!-- input tag taking input from user and name is tasks -->
+            <input type="text" class="form-control" name="task" placeholder="Enter Your Tasks..">
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-secondary" type="submit">Add tasks</button>
+        </div>
+        </form>
+<!-- end forms -->
+
+
+<!-- print or display data in table here start the table -->
+        <table class="table table-success table-striped table-bordered mt-4 " style="width:80%">
+          <thead>
+            <tr class="text-center table-dark">
+              <!-- table head -->
+              <th scope="col">No</th>
+              <th scope="col">Tasks</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in disp %}
+            <tr class="text-center">
+              <td>{{forloop.counter}}</td> 
+              <td>{{i.task_desc}}</td> 
+              <td>{{i.status}}</td> 
+              <td>
+                 <a href="{% url 'delete'  i.task_id  %}"><button class="btn btn-danger">delete</button></a>
+                 <a href="{% url 'complete'  i.task_id  %}"><button class="btn btn-success">Complated</button></a>
+
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+</div>
+
+{% endblock body%}
